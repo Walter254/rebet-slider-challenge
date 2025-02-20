@@ -9,8 +9,8 @@ const OrbContainer = styled.div`
   position: absolute;
   top: 45%;
   left: 50%;
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   transform: translate(-50%, -50%);
   cursor: grab;
   z-index: 2;
@@ -21,8 +21,8 @@ const OrbContainer = styled.div`
 `;
 
 const StaticOrb = styled.img`
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   object-fit: contain;
   transition: filter 0.3s ease;
   filter: drop-shadow(0 0 0 transparent);
