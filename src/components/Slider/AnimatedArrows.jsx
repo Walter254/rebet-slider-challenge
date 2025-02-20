@@ -13,7 +13,7 @@ const ArrowContainer = styled.div`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
+  width: 45px;
   height: 24px;
   pointer-events: none;
   

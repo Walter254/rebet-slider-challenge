@@ -21,7 +21,7 @@ export const Track = styled.div`
     }
     return `linear-gradient(to right, ${COLORS.NEUTRAL.LIGHT}, ${COLORS.NEUTRAL.DARK})`;
   }};
-  border-radius: ${DIMENSIONS.BORDER_RADIUS}px; // Changed from 9999px to specific radius
+  border-radius: ${DIMENSIONS.BORDER_RADIUS}px;
   position: relative;
   transition: all 0.3s ease;
   display: flex;
@@ -38,80 +38,32 @@ export const Track = styled.div`
   }};
 `;
 
-export const Orb = styled.div`
-  width: ${DIMENSIONS.ORB_SIZE}px;
-  height: ${DIMENSIONS.ORB_SIZE}px;
-  background-color: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  cursor: grab;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  display: flex;           // for centering the inner circle
-  justify-content: center; // for centering the inner circle
-  align-items: center;     // for centering the inner circle
-  box-shadow: ${props => {
-    if (props.position < 0) {
-      return `0 0 20px ${COLORS.DECLINE.BORDER.DARK}`;
-    } else if (props.position > 0) {
-      return `0 0 20px ${COLORS.ACCEPT.BORDER.DARK}`;
-    }
-    return `0 0 20px ${COLORS.NEUTRAL.BORDER.DARK}`;
-  }};
-  
-  transition: ${props => 
-    props.isDragging
-      ? 'none'
-      : 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)'
-  };
-
-  &:active {
-    cursor: grabbing;
-  }
-`;
-
-export const OrbCenter = styled.div`
-  width: 35px;  // Size of the inner circle
-  height: 35px; // Size of the inner circle
-  background-color: rgba(0, 0, 0, 0.8); // Slightly transparent black
-  border-radius: 50%;
-  position: relative;
-  z-index: 3;
-`;
-
-export const Arrow = styled.span`
-  color: ${COLORS.NEUTRAL.BORDER.DARK};
-  font-size: 24px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.8;
-  
-  &.left {
-    left: 30%;
-  }
-  
-  &.right {
-    right: 30%;
-  }
-`;
-
 export const Indicator = styled.div`
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
+  position: absolute;
   display: flex;
   align-items: center;
-  gap: 8px;
-  z-index: 1;
-  opacity: ${props => props.visible ? 1 : 0.7};
-  transition: opacity 0.3s ease;
+  gap: 2px;
+  color: white;
+  font-size: 16px;
   pointer-events: none;
+  transition: color 300ms ease;
+  
+  // Positioning for the decline (left) side
+  &:first-child {
+    left: 2%;
+  }
+  
+  // Positioning for the accept (right) side
+  &:last-child {
+    right: 2%;
+  }
 `;
 
-export const Icon = styled.span`
-  font-size: 20px;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: ${props => props.side === 'left' ? '0 8px 0 0' : '0 0 0 8px'};
 `;
 

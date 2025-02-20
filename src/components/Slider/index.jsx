@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { SliderContainer, Track, Indicator, Icon} from './styles';
+import { SliderContainer, Track, Indicator, IconWrapper} from './styles';
 import { Orb } from './Orb';
 import { Arrows } from './AnimatedArrows';
+import { Icon } from './icon';
 import { DIMENSIONS, THRESHOLDS } from './constants';
 import { getTranslation } from '../../locales';
 
@@ -88,33 +89,37 @@ const Slider = ({ language = 'en' }) => {
   return (
     <SliderContainer ref={containerRef}>
       <Track position={position}>
-        <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
-          <Icon>×</Icon>
+        <Indicator>
+          <IconWrapper side="left">
+            <Icon 
+              type="close" 
+              position={position} 
+            />
+          </IconWrapper>
           {t.decline}
         </Indicator>
         <Arrows 
           side="left" 
           position={currentState} 
         />
-        <Orb
+        <Orb 
           onMouseDown={handleMouseDown}
           position={position}
           isDragging={isDragging}
           isSpringAnimating={isSpringAnimating}
-          style={{
-            transform: `translate(calc(-50% + ${position}px), -50%)`,
-            transition: isSpringAnimating 
-              ? 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)' 
-              : 'none'
-          }}
         />
         <Arrows 
           side="right" 
           position={currentState} 
         />
-        <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
+        <Indicator>
           {t.accept}
-          <Icon>✓</Icon>
+          <IconWrapper side="right">
+            <Icon 
+              type="check" 
+              position={position} 
+            />
+          </IconWrapper>
         </Indicator>
       </Track>
     </SliderContainer>
