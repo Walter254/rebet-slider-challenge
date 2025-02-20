@@ -11,31 +11,79 @@ export const SliderContainer = styled.div`
 `;
 
 export const Track = styled.div`
+  position: relative;
   width: ${DIMENSIONS.TRACK_WIDTH}px;
   height: ${DIMENSIONS.TRACK_HEIGHT}px;
+  border-radius: ${DIMENSIONS.BORDER_RADIUS}px;
   background: ${props => {
     if (props.position < 0) {
-      return `linear-gradient(to right, ${COLORS.DECLINE.LIGHT}, ${COLORS.DECLINE.DARK})`;
+      return `linear-gradient(
+        90deg, 
+        ${COLORS.DECLINE.LIGHT} 0%,
+        ${COLORS.DECLINE.DARK} 50%,
+        ${COLORS.DECLINE.LIGHT} 100%
+      )`;
     } else if (props.position > 0) {
-      return `linear-gradient(to right, ${COLORS.ACCEPT.LIGHT}, ${COLORS.ACCEPT.DARK})`;
+      return `linear-gradient(
+        90deg, 
+        ${COLORS.ACCEPT.LIGHT} 0%,
+        ${COLORS.ACCEPT.DARK} 50%,
+        ${COLORS.ACCEPT.LIGHT} 100%
+      )`;
     }
-    return `linear-gradient(to right, ${COLORS.NEUTRAL.LIGHT}, ${COLORS.NEUTRAL.DARK})`;
+    return `linear-gradient(
+      90deg, 
+      ${COLORS.NEUTRAL.LIGHT} 0%,
+      ${COLORS.NEUTRAL.DARK} 50%,
+      ${COLORS.NEUTRAL.LIGHT} 100%
+    )`;
   }};
-  border-radius: ${DIMENSIONS.BORDER_RADIUS}px;
-  position: relative;
   transition: all 0.3s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
-  box-shadow: ${props => {
-    if (props.position < 0) {
-      return `0 0 0 ${DIMENSIONS.BORDER_WIDTH}px ${COLORS.DECLINE.BORDER.DARK}`;
-    } else if (props.position > 0) {
-      return `0 0 0 ${DIMENSIONS.BORDER_WIDTH}px ${COLORS.ACCEPT.BORDER.DARK}`;
-    }
-    return `0 0 0 ${DIMENSIONS.BORDER_WIDTH}px ${COLORS.NEUTRAL.BORDER.DARK}`;
-  }};
+  border: ${DIMENSIONS.BORDER_WIDTH}px solid transparent;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -${DIMENSIONS.BORDER_WIDTH}px;
+    border-radius: ${DIMENSIONS.BORDER_RADIUS + DIMENSIONS.BORDER_WIDTH}px;
+    padding: ${DIMENSIONS.BORDER_WIDTH}px;
+    background: ${props => {
+      if (props.position < 0) {
+        return `linear-gradient(
+          90deg, 
+          ${COLORS.DECLINE.BORDER.LIGHT} 0%,
+          ${COLORS.DECLINE.BORDER.DARK} 50%,
+          ${COLORS.DECLINE.BORDER.LIGHT} 100%
+        )`;
+      } else if (props.position > 0) {
+        return `linear-gradient(
+          90deg, 
+          ${COLORS.ACCEPT.BORDER.LIGHT} 0%,
+          ${COLORS.ACCEPT.BORDER.DARK} 50%,
+          ${COLORS.ACCEPT.BORDER.LIGHT} 100%
+        )`;
+      }
+      return `linear-gradient(
+        90deg, 
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 0%,
+        ${COLORS.NEUTRAL.BORDER.DARK} 50%,
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 100%
+      )`;
+    }};
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 `;
 
 export const Indicator = styled.div`
