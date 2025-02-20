@@ -31,4 +31,4 @@ An interactive slider component built with React that provides an engaging way t
 
 Watch the video to see the component in action:
 
-https://www.loom.com/share/eefc042f11cf41ce999451559c6d75f8?sid=06ee2d00-fa00-43c5-a042-28de6e0dd31f
+https://www.loom.com/share/284a54c4d5844a218d98caf4433e783c?sid=0776d4b1-ce2c-4661-b985-637ba86b4b98
