@@ -43,7 +43,7 @@ export const Track = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
-  border: ${DIMENSIONS.BORDER_WIDTH}px solid transparent;
+  border: ${DIMENSIONS.BORDER_WIDTH}px solid rgba(0, 0, 0, 0.2);
 
   &::before {
     content: '';
@@ -80,11 +80,11 @@ export const Track = styled.div`
         ${COLORS.NEUTRAL.BORDER.LIGHT} 100%
       )`;
     }};
-    -webkit-mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
-    mask: 
-      linear-gradient(#fff 0 0) content-box, 
+    mask:
+      linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -105,30 +105,28 @@ export const Indicator = styled.div`
   // Color transitions based on orb position
   color: ${props => {
     if (Math.abs(props.position) < 10) {
-      return COLORS.TEXT.WHITE;  // Center position - white
+      return COLORS.TEXT.WHITE; // Center position - white
     } else if (props.position > 0) {
-      return COLORS.TEXT.GREEN;  // Right position - specific green
+      return COLORS.TEXT.GREEN; // Right position - green
     } else {
-      return COLORS.TEXT.RED;    // Left position - specific red
+      return COLORS.TEXT.RED; // Left position - red
     }
   }};
-  
+
   // Positioning for the decline (left) side
   &:first-child {
     left: 2%;
   }
-  
+
   // Positioning for the accept (right) side
   &:last-child {
     right: 2%;
   }
 `;
 
-
 export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: ${props => props.side === 'left' ? '0 8px 0 0' : '0 0 0 8px'};
+  margin: ${props => (props.side === 'left' ? '0 8px 0 0' : '0 0 0 8px')};
 `;
-

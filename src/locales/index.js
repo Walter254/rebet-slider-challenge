@@ -1,8 +1,7 @@
 import en from './en';
 
-
 export const translations = {
-  en
+  en,
 };
 
 export const getTranslation = (language = 'en') => {

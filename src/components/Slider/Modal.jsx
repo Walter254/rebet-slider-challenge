@@ -43,7 +43,7 @@ const CloseButton = styled.button`
   cursor: pointer;
   padding: 0.5rem;
   color: #666;
-  
+
   &:hover {
     color: #333;
   }
@@ -51,10 +51,10 @@ const CloseButton = styled.button`
 
 export const Modal = ({ children, onClose }) => {
   React.useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = e => {
       if (e.key === 'Escape') onClose();
     };
-    
+
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [onClose]);
@@ -69,10 +69,10 @@ export const Modal = ({ children, onClose }) => {
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
-        <CloseButton onClick={onClose} aria-label="Close modal">×</CloseButton>
-        <div style={{ width: '100%' }}>
-          {children}
-        </div>
+        <CloseButton onClick={onClose} aria-label="Close modal">
+          ×
+        </CloseButton>
+        <div style={{ width: '100%' }}>{children}</div>
       </ModalContent>
     </ModalOverlay>
   );

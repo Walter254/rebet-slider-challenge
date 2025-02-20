@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 import whiteCheck from '../assets/StaticAssets/white_check.png';
 import greenCheck from '../assets/StaticAssets/green_check.png';
 import redCheck from '../assets/StaticAssets/red_check.png';
@@ -17,11 +16,14 @@ const IconImage = styled.img`
 
 export const Icon = ({ type, position }) => {
   const getIconSrc = () => {
-    if (Math.abs(position) < 10) { // Center position
+    if (Math.abs(position) < 10) {
+      // Center position
       return type === 'check' ? whiteCheck : whiteClose;
-    } else if (position > 0) { // Right position
+    } else if (position > 0) {
+      // Right position
       return type === 'check' ? greenCheck : greenClose;
-    } else { // Left position
+    } else {
+      // Left position
       return type === 'check' ? redCheck : redClose;
     }
   };

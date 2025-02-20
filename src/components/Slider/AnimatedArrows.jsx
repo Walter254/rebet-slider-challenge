@@ -16,11 +16,11 @@ const ArrowContainer = styled.div`
   width: 45px;
   height: 24px;
   pointer-events: none;
-  
+
   &.left {
     left: 30%;
   }
-  
+
   &.right {
     right: 30%;
   }
@@ -46,7 +46,10 @@ export const Arrows = ({ position, side }) => {
   if (position === 'decline') {
     return (
       <ArrowContainer className={side}>
-        <StaticImage src={side === 'left' ? staticLeftRedArrows : staticRightRedArrows} alt="arrow" />
+        <StaticImage
+          src={side === 'left' ? staticLeftRedArrows : staticRightRedArrows}
+          alt="arrow"
+        />
       </ArrowContainer>
     );
   }
@@ -54,7 +57,10 @@ export const Arrows = ({ position, side }) => {
   if (position === 'accept') {
     return (
       <ArrowContainer className={side}>
-        <StaticImage src={side === 'left' ? staticLeftGreenArrows : staticRightGreenArrows} alt="arrow" />
+        <StaticImage
+          src={side === 'left' ? staticLeftGreenArrows : staticRightGreenArrows}
+          alt="arrow"
+        />
       </ArrowContainer>
     );
   }
