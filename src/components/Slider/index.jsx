@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { SliderContainer, Track, Orb, Indicator, Arrow, Icon, OrbCenter } from './styles';
-import { LeftArrows, RightArrows } from './AnimatedArrows';
-import { DIMENSIONS, COLORS, THRESHOLDS } from './constants';
+import { useState, useRef, useEffect } from 'react';
+import { SliderContainer, Track, Orb, Indicator, Icon, OrbCenter } from './styles';
+import { Arrows } from './AnimatedArrows';
+import { DIMENSIONS, THRESHOLDS } from './constants';
 import { getTranslation } from '../../locales';
 
 const Slider = ({ language = 'en' }) => {
@@ -22,7 +22,7 @@ const Slider = ({ language = 'en' }) => {
   };
 
   const handleMouseDown = (e) => {
-    e.preventDefault(); // Prevent text selection
+    e.preventDefault();
     setIsDragging(true);
     startXRef.current = e.clientX;
     orbPositionRef.current = position;
@@ -67,33 +67,51 @@ const Slider = ({ language = 'en' }) => {
     };
   }, [isDragging]);
 
+  // Determine the current position state
+  const getPositionState = () => {
+    if (Math.abs(normalizedPosition) < THRESHOLDS.COLOR_TRANSITION) {
+      return 'neutral';  // Center - orange and animated
+    } else if (normalizedPosition < 0) {
+      return 'decline';  // Left - static red
+    } else {
+      return 'accept';   // Right - static green
+    }
+  };
 
-    return (
-        <SliderContainer ref={containerRef}>
-          <Track position={position}>
-            <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
-              <Icon>×</Icon>
-              {t.decline}
-            </Indicator>
-            <LeftArrows />
-            <Orb
-              onMouseDown={handleMouseDown}
-              position={position}
-              isDragging={isDragging}
-              style={{
-                transform: `translate(calc(-50% + ${position}px), -50%)`
-              }}
-            >
-              <OrbCenter />
-            </Orb>
-            <RightArrows />
-            <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
-              {t.accept}
-              <Icon>✓</Icon>
-            </Indicator>
-          </Track>
-        </SliderContainer>
-      );
+  const currentState = getPositionState();
+
+  return (
+    <SliderContainer ref={containerRef}>
+      <Track position={position}>
+        <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
+          <Icon>×</Icon>
+          {t.decline}
+        </Indicator>
+        <Arrows 
+          side="left" 
+          position={currentState} 
+        />
+        <Orb
+          onMouseDown={handleMouseDown}
+          position={position}
+          isDragging={isDragging}
+          style={{
+            transform: `translate(calc(-50% + ${position}px), -50%)`
+          }}
+        >
+          <OrbCenter />
+        </Orb>
+        <Arrows 
+          side="right" 
+          position={currentState} 
+        />
+        <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
+          {t.accept}
+          <Icon>✓</Icon>
+        </Indicator>
+      </Track>
+    </SliderContainer>
+  );
 };
 
 export default Slider;
