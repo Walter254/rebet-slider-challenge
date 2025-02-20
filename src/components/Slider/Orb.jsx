@@ -25,18 +25,24 @@ const StaticOrb = styled.img`
   width: 120px;  
   height: 120px; 
   object-fit: contain;
-  filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.7));
-  animation: pulse 2s ease-in-out infinite;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(0 0 0 transparent);
 
-  @keyframes pulse {
-    0% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
-    50% { filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.8)); }
-    100% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
-  }
+  /* Only apply glow when in center position */
+  &[data-position="center"] {
+    filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.7));
+    animation: pulse 2s ease-in-out infinite;
 
-  &:hover {
-    animation: none;
-    filter: drop-shadow(0 0 8px rgba(255, 166, 0, 0.9));
+    @keyframes pulse {
+      0% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
+      50% { filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.8)); }
+      100% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
+    }
+
+    &:hover {
+      animation: none;
+      filter: drop-shadow(0 0 8px rgba(255, 166, 0, 0.9));
+    }
   }
 `;
 

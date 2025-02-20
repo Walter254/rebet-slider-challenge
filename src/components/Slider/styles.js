@@ -20,21 +20,21 @@ export const Track = styled.div`
       return `linear-gradient(
         90deg, 
         ${COLORS.DECLINE.LIGHT} 0%,
-        ${COLORS.DECLINE.DARK} 50%,
+        ${COLORS.DECLINE.DARK} 80%,
         ${COLORS.DECLINE.LIGHT} 100%
       )`;
     } else if (props.position > 0) {
       return `linear-gradient(
         90deg, 
         ${COLORS.ACCEPT.LIGHT} 0%,
-        ${COLORS.ACCEPT.DARK} 50%,
+        ${COLORS.ACCEPT.DARK} 80%,
         ${COLORS.ACCEPT.LIGHT} 100%
       )`;
     }
     return `linear-gradient(
       90deg, 
       ${COLORS.NEUTRAL.LIGHT} 0%,
-      ${COLORS.NEUTRAL.DARK} 50%,
+      ${COLORS.NEUTRAL.DARK} 80%,
       ${COLORS.NEUTRAL.LIGHT} 100%
     )`;
   }};
@@ -56,21 +56,27 @@ export const Track = styled.div`
         return `linear-gradient(
           90deg, 
           ${COLORS.DECLINE.BORDER.LIGHT} 0%,
-          ${COLORS.DECLINE.BORDER.DARK} 50%,
+          ${COLORS.DECLINE.BORDER.LIGHT} 5%,
+          ${COLORS.DECLINE.BORDER.DARK} 80%,
+          ${COLORS.DECLINE.BORDER.LIGHT} 95%,
           ${COLORS.DECLINE.BORDER.LIGHT} 100%
         )`;
       } else if (props.position > 0) {
         return `linear-gradient(
           90deg, 
           ${COLORS.ACCEPT.BORDER.LIGHT} 0%,
-          ${COLORS.ACCEPT.BORDER.DARK} 50%,
+          ${COLORS.ACCEPT.BORDER.LIGHT} 5%,
+          ${COLORS.ACCEPT.BORDER.DARK} 80%,
+          ${COLORS.ACCEPT.BORDER.LIGHT} 95%,
           ${COLORS.ACCEPT.BORDER.LIGHT} 100%
         )`;
       }
       return `linear-gradient(
         90deg, 
         ${COLORS.NEUTRAL.BORDER.LIGHT} 0%,
-        ${COLORS.NEUTRAL.BORDER.DARK} 50%,
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 5%,
+        ${COLORS.NEUTRAL.BORDER.DARK} 80%,
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 95%,
         ${COLORS.NEUTRAL.BORDER.LIGHT} 100%
       )`;
     }};

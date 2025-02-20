@@ -36,7 +36,7 @@ export const COLORS = {
     TRACK_WIDTH: 335,
     TRACK_HEIGHT: 68,
     ORB_SIZE: 60,
-    BORDER_WIDTH: 3,
+    BORDER_WIDTH: 4,
     BORDER_RADIUS: 16
   };
   
