@@ -5,9 +5,16 @@ export const COLORS = {
     TRACK: '#E5E5EA',
     BACKGROUND: '#FFFFFF'
   };
-  
+
   export const DIMENSIONS = {
-    TRACK_WIDTH: '300px',
-    TRACK_HEIGHT: '4px',
-    ORB_SIZE: '20px'
+    TRACK_WIDTH: 300, 
+    TRACK_HEIGHT: 4,
+    ORB_SIZE: 20
+  };
+  
+  export const MOTION = {
+    SPRING_CONFIG: {
+      stiffness: 400,
+      damping: 30
+    }
   };
