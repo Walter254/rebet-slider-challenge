@@ -1,13 +1,19 @@
-import { useState, useRef, useEffect } from 'react';
-import { SliderContainer, Track, Orb } from './styles';
-import { DIMENSIONS } from './constants';
+import React, { useState, useRef, useEffect } from 'react';
+import { SliderContainer, Track, Orb, Indicator, Arrow, Icon } from './styles';
+import { DIMENSIONS, COLORS, THRESHOLDS } from './constants';
+import { getTranslation } from '../../locales';
 
-const Slider = () => {
+const Slider = ({ language = 'en' }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState(0);
   const containerRef = useRef(null);
   const startXRef = useRef(0);
   const orbPositionRef = useRef(0);
+
+  const t = getTranslation(language).slider;
+
+  // Calculate normalized position (-1 to 1)
+  const normalizedPosition = position / (DIMENSIONS.TRACK_WIDTH / 2);
 
   const calculateBoundedPosition = (rawPosition) => {
     const maxOffset = DIMENSIONS.TRACK_WIDTH / 2 - DIMENSIONS.ORB_SIZE / 2;
@@ -15,6 +21,7 @@ const Slider = () => {
   };
 
   const handleMouseDown = (e) => {
+    e.preventDefault(); // Prevent text selection
     setIsDragging(true);
     startXRef.current = e.clientX;
     orbPositionRef.current = position;
@@ -22,7 +29,6 @@ const Slider = () => {
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-
     const deltaX = e.clientX - startXRef.current;
     const newPosition = calculateBoundedPosition(orbPositionRef.current + deltaX);
     setPosition(newPosition);
@@ -30,37 +36,56 @@ const Slider = () => {
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    // Return to center with animation
+    if (Math.abs(normalizedPosition) >= THRESHOLDS.ACTIVATION) {
+      console.log(normalizedPosition > 0 ? 'Accepted' : 'Declined');
+    }
     setPosition(0);
   };
 
   useEffect(() => {
-    const handleMouseUpGlobal = () => {
+    const handleGlobalMouseMove = (e) => {
+      if (isDragging) {
+        handleMouseMove(e);
+      }
+    };
+
+    const handleGlobalMouseUp = () => {
       if (isDragging) {
         handleMouseUp();
       }
     };
 
-    document.addEventListener('mouseup', handleMouseUpGlobal);
+    if (isDragging) {
+      document.addEventListener('mousemove', handleGlobalMouseMove);
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+    }
+
     return () => {
-      document.removeEventListener('mouseup', handleMouseUpGlobal);
+      document.removeEventListener('mousemove', handleGlobalMouseMove);
+      document.removeEventListener('mouseup', handleGlobalMouseUp);
     };
   }, [isDragging]);
 
   return (
-    <SliderContainer
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-    >
-      <Track>
+    <SliderContainer ref={containerRef}>
+      <Track position={position}>
+        <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
+          <Icon>×</Icon>
+          {t.decline}
+        </Indicator>
+        <Arrow className="left">《</Arrow>
         <Orb
           onMouseDown={handleMouseDown}
+          position={position}
           style={{
             transform: `translate(calc(-50% + ${position}px), -50%)`
           }}
         />
+        <Arrow className="right">》</Arrow>
+        <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
+          {t.accept}
+          <Icon>✓</Icon>
+        </Indicator>
       </Track>
     </SliderContainer>
   );
