@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { SliderContainer, Track, Orb, Indicator, Arrow, Icon, OrbCenter } from './styles';
+import { LeftArrows, RightArrows } from './AnimatedArrows';
 import { DIMENSIONS, COLORS, THRESHOLDS } from './constants';
 import { getTranslation } from '../../locales';
 
@@ -66,32 +67,33 @@ const Slider = ({ language = 'en' }) => {
     };
   }, [isDragging]);
 
-  return (
-    <SliderContainer ref={containerRef}>
-      <Track position={position}>
-        <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
-          <Icon>×</Icon>
-          {t.decline}
-        </Indicator>
-        <Arrow className="left">《</Arrow>
-        <Orb
-          onMouseDown={handleMouseDown}
-          position={position}
-          isDragging={isDragging}
-          style={{
-            transform: `translate(calc(-50% + ${position}px), -50%)`
-          }}
-        >
-          <OrbCenter />
-        </Orb>
-        <Arrow className="right">》</Arrow>
-        <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
-          {t.accept}
-          <Icon>✓</Icon>
-        </Indicator>
-      </Track>
-    </SliderContainer>
-  );
+
+    return (
+        <SliderContainer ref={containerRef}>
+          <Track position={position}>
+            <Indicator visible={normalizedPosition < -THRESHOLDS.COLOR_TRANSITION}>
+              <Icon>×</Icon>
+              {t.decline}
+            </Indicator>
+            <LeftArrows />
+            <Orb
+              onMouseDown={handleMouseDown}
+              position={position}
+              isDragging={isDragging}
+              style={{
+                transform: `translate(calc(-50% + ${position}px), -50%)`
+              }}
+            >
+              <OrbCenter />
+            </Orb>
+            <RightArrows />
+            <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
+              {t.accept}
+              <Icon>✓</Icon>
+            </Indicator>
+          </Track>
+        </SliderContainer>
+      );
 };
 
 export default Slider;
