@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { SliderContainer, Track, Orb, Indicator, Icon, OrbCenter } from './styles';
+
+import { SliderContainer, Track, Indicator, Icon} from './styles';
+import { Orb } from './Orb';
 import { Arrows } from './AnimatedArrows';
 import { DIMENSIONS, THRESHOLDS } from './constants';
 import { getTranslation } from '../../locales';
@@ -7,6 +9,7 @@ import { getTranslation } from '../../locales';
 const Slider = ({ language = 'en' }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState(0);
+  const [isSpringAnimating, setIsSpringAnimating] = useState(false);
   const containerRef = useRef(null);
   const startXRef = useRef(0);
   const orbPositionRef = useRef(0);
@@ -24,6 +27,7 @@ const Slider = ({ language = 'en' }) => {
   const handleMouseDown = (e) => {
     e.preventDefault();
     setIsDragging(true);
+    setIsSpringAnimating(false);
     startXRef.current = e.clientX;
     orbPositionRef.current = position;
   };
@@ -40,6 +44,7 @@ const Slider = ({ language = 'en' }) => {
     if (Math.abs(normalizedPosition) >= THRESHOLDS.ACTIVATION) {
       console.log(normalizedPosition > 0 ? 'Accepted' : 'Declined');
     }
+    setIsSpringAnimating(true);
     setPosition(0);
   };
 
@@ -95,12 +100,14 @@ const Slider = ({ language = 'en' }) => {
           onMouseDown={handleMouseDown}
           position={position}
           isDragging={isDragging}
+          isSpringAnimating={isSpringAnimating}
           style={{
-            transform: `translate(calc(-50% + ${position}px), -50%)`
+            transform: `translate(calc(-50% + ${position}px), -50%)`,
+            transition: isSpringAnimating 
+              ? 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)' 
+              : 'none'
           }}
-        >
-          <OrbCenter />
-        </Orb>
+        />
         <Arrows 
           side="right" 
           position={currentState} 
