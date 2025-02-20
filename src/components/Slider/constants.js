@@ -31,10 +31,11 @@ export const COLORS = {
   };
   
   export const DIMENSIONS = {
-    TRACK_WIDTH: 500,
-    TRACK_HEIGHT: 56,
-    ORB_SIZE: 40,
-    BORDER_WIDTH: 2
+    TRACK_WIDTH: 335,
+    TRACK_HEIGHT: 68,
+    ORB_SIZE: 50,
+    BORDER_WIDTH: 5,
+    BORDER_RADIUS: 16
   };
   
   export const THRESHOLDS = {

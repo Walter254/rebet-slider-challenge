@@ -77,6 +77,7 @@ const Slider = ({ language = 'en' }) => {
         <Orb
           onMouseDown={handleMouseDown}
           position={position}
+          isDragging={isDragging}
           style={{
             transform: `translate(calc(-50% + ${position}px), -50%)`
           }}

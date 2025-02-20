@@ -21,7 +21,7 @@ export const Track = styled.div`
     }
     return `linear-gradient(to right, ${COLORS.NEUTRAL.LIGHT}, ${COLORS.NEUTRAL.DARK})`;
   }};
-  border-radius: 9999px;
+  border-radius: ${DIMENSIONS.BORDER_RADIUS}px; // Changed from 9999px to specific radius
   position: relative;
   transition: all 0.3s ease;
   display: flex;
@@ -47,7 +47,7 @@ export const Orb = styled.div`
   top: 50%;
   left: 50%;
   cursor: grab;
-  transition: transform 0.3s ease-out;
+  transform: translate(-50%, -50%);
   z-index: 2;
   box-shadow: ${props => {
     if (props.position < 0) {
@@ -58,6 +58,12 @@ export const Orb = styled.div`
     return `0 0 20px ${COLORS.NEUTRAL.BORDER.DARK}`;
   }};
   
+  transition: ${props => 
+    props.isDragging
+      ? 'none' 
+      : 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)' // Bouncy spring effect when released
+  };
+
   &:active {
     cursor: grabbing;
   }
