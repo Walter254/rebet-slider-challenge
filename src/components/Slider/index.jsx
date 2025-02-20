@@ -89,7 +89,7 @@ const Slider = ({ language = 'en' }) => {
   return (
     <SliderContainer ref={containerRef}>
       <Track position={position}>
-        <Indicator>
+        <Indicator position={position}>
           <IconWrapper side="left">
             <Icon 
               type="close" 
@@ -112,7 +112,7 @@ const Slider = ({ language = 'en' }) => {
           side="right" 
           position={currentState} 
         />
-        <Indicator>
+        <Indicator position={position}>
           {t.accept}
           <IconWrapper side="right">
             <Icon 

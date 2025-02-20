@@ -2,6 +2,12 @@ export const COLORS = {
     // Track colors
     TRACK_BG: 'rgba(20, 20, 27, 0.95)',
     BORDER_GLOW: 'rgba(255, 68, 51, 0.5)',
+
+    TEXT: {
+        WHITE: '#FFFFFF',
+        GREEN: 'rgba(7, 110, 73, 1)',
+        RED: 'rgba(128, 32, 55, 1)'
+    },
     
     // State-specific colors
     DECLINE: {

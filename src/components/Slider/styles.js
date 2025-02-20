@@ -47,6 +47,17 @@ export const Indicator = styled.div`
   font-size: 16px;
   pointer-events: none;
   transition: color 300ms ease;
+
+  // Color transitions based on orb position
+  color: ${props => {
+    if (Math.abs(props.position) < 10) {
+      return COLORS.TEXT.WHITE;  // Center position - white
+    } else if (props.position > 0) {
+      return COLORS.TEXT.GREEN;  // Right position - specific green
+    } else {
+      return COLORS.TEXT.RED;    // Left position - specific red
+    }
+  }};
   
   // Positioning for the decline (left) side
   &:first-child {
