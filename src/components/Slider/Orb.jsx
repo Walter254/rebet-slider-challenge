@@ -1,18 +1,17 @@
 import { useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import Lottie from 'lottie-react';
 
-import glowingCircleData from '../assets/AnimatedAssets/glowing_circle.json';
 import redButton from '../assets/StaticAssets/red_button.png';
 import greenButton from '../assets/StaticAssets/green_button.png';
 import orangeButton from '../assets/StaticAssets/orange_button.png';
 
+
 const OrbContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
-  width: 130px;  
-  height: 130px; 
+  width: 120px;  
+  height: 120px; 
   transform: translate(-50%, -50%);
   cursor: grab;
   z-index: 2;
@@ -23,20 +22,22 @@ const OrbContainer = styled.div`
 `;
 
 const StaticOrb = styled.img`
-  width: 130px;  
-  height: 130px; 
+  width: 120px;  
+  height: 120px; 
   object-fit: contain;
-`;
+  filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.7));
+  animation: pulse 2s ease-in-out infinite;
 
+  @keyframes pulse {
+    0% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
+    50% { filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.8)); }
+    100% { filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4)); }
+  }
 
-const LottieWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100px; 
-  height: 100px;
-  pointer-events: none;
+  &:hover {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(255, 166, 0, 0.9));
+  }
 `;
 
 export const Orb = ({ position, isDragging, isSpringAnimating, onMouseDown, style }) => {
