@@ -26,32 +26,33 @@ const StaticOrb = styled.img`
   object-fit: contain;
   transition: filter 0.3s ease;
   filter: drop-shadow(0 0 0 transparent);
+`;
 
-  /* Only apply glow when in center position */
-  &[data-position='center'] {
-    filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.7));
-    animation: pulse 2s ease-in-out infinite;
+const OrangeOrb = styled(StaticOrb)`
+  position: relative;
+  z-index: 3;
+  filter: drop-shadow(0 0 4px rgba(255, 166, 0, 0.7));
+  animation: pulse 2s ease-in-out infinite;
 
-    @keyframes pulse {
-      0% {
-        filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4));
-      }
-      50% {
-        filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.8));
-      }
-      100% {
-        filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4));
-      }
+  @keyframes pulse {
+    0% {
+      filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4));
     }
-
-    &:hover {
-      animation: none;
-      filter: drop-shadow(0 0 8px rgba(255, 166, 0, 0.9));
+    50% {
+      filter: drop-shadow(0 0 6px rgba(255, 166, 0, 0.8));
     }
+    100% {
+      filter: drop-shadow(0 0 2px rgba(255, 166, 0, 0.4));
+    }
+  }
+
+  &:hover {
+    animation: none;
+    filter: drop-shadow(0 0 8px rgba(255, 166, 0, 0.9));
   }
 `;
 
-export const Orb = ({ position, isDragging, isSpringAnimating, onMouseDown, style }) => {
+export const Orb = ({ position, isDragging, isSpringAnimating, onMouseDown }) => {
   const lottieRef = useRef();
 
   useEffect(() => {
@@ -65,11 +66,7 @@ export const Orb = ({ position, isDragging, isSpringAnimating, onMouseDown, styl
   const getOrbContent = () => {
     if (Math.abs(position) < 10) {
       // At center
-      return (
-        <>
-          <StaticOrb src={orangeButton} alt="orb" style={{ position: 'relative', zIndex: 3 }} />
-        </>
-      );
+      return <OrangeOrb src={orangeButton} alt="orb" />;
     } else if (position < 0) {
       return <StaticOrb src={redButton} alt="orb" />;
     } else {
