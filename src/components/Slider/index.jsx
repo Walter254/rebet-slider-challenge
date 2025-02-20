@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { SliderContainer, Track, Orb, Indicator, Arrow, Icon } from './styles';
+import { SliderContainer, Track, Orb, Indicator, Arrow, Icon, OrbCenter } from './styles';
 import { DIMENSIONS, COLORS, THRESHOLDS } from './constants';
 import { getTranslation } from '../../locales';
 
@@ -81,7 +81,9 @@ const Slider = ({ language = 'en' }) => {
           style={{
             transform: `translate(calc(-50% + ${position}px), -50%)`
           }}
-        />
+        >
+          <OrbCenter />
+        </Orb>
         <Arrow className="right">》</Arrow>
         <Indicator visible={normalizedPosition > THRESHOLDS.COLOR_TRANSITION}>
           {t.accept}

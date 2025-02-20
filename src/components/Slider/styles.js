@@ -49,6 +49,9 @@ export const Orb = styled.div`
   cursor: grab;
   transform: translate(-50%, -50%);
   z-index: 2;
+  display: flex;           // for centering the inner circle
+  justify-content: center; // for centering the inner circle
+  align-items: center;     // for centering the inner circle
   box-shadow: ${props => {
     if (props.position < 0) {
       return `0 0 20px ${COLORS.DECLINE.BORDER.DARK}`;
@@ -60,13 +63,22 @@ export const Orb = styled.div`
   
   transition: ${props => 
     props.isDragging
-      ? 'none' 
-      : 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)' // Bouncy spring effect when released
+      ? 'none'
+      : 'transform 600ms cubic-bezier(0.25, 0.8, 0.25, 1.3)'
   };
 
   &:active {
     cursor: grabbing;
   }
+`;
+
+export const OrbCenter = styled.div`
+  width: 35px;  // Size of the inner circle
+  height: 35px; // Size of the inner circle
+  background-color: rgba(0, 0, 0, 0.8); // Slightly transparent black
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
 `;
 
 export const Arrow = styled.span`
