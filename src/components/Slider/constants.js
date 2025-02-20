@@ -42,5 +42,5 @@ export const COLORS = {
   
   export const THRESHOLDS = {
     ACTIVATION: 0.8,
-    COLOR_TRANSITION: 0.1
+    COLOR_TRANSITION: 0.05
   };
