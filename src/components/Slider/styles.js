@@ -20,21 +20,27 @@ export const Track = styled.div`
       return `linear-gradient(
         90deg, 
         ${COLORS.DECLINE.LIGHT} 0%,
-        ${COLORS.DECLINE.DARK} 80%,
+        ${COLORS.DECLINE.LIGHT} 15%,
+        ${COLORS.DECLINE.DARK} 50%,
+        ${COLORS.DECLINE.LIGHT} 85%,
         ${COLORS.DECLINE.LIGHT} 100%
       )`;
     } else if (props.position > 0) {
       return `linear-gradient(
         90deg, 
         ${COLORS.ACCEPT.LIGHT} 0%,
-        ${COLORS.ACCEPT.DARK} 80%,
+        ${COLORS.ACCEPT.LIGHT} 15%,
+        ${COLORS.ACCEPT.DARK} 50%,
+        ${COLORS.ACCEPT.LIGHT} 85%,
         ${COLORS.ACCEPT.LIGHT} 100%
       )`;
     }
     return `linear-gradient(
       90deg, 
       ${COLORS.NEUTRAL.LIGHT} 0%,
-      ${COLORS.NEUTRAL.DARK} 80%,
+      ${COLORS.NEUTRAL.LIGHT} 15%,
+      ${COLORS.NEUTRAL.DARK} 50%,
+      ${COLORS.NEUTRAL.LIGHT} 85%,
       ${COLORS.NEUTRAL.LIGHT} 100%
     )`;
   }};
@@ -43,7 +49,6 @@ export const Track = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 24px;
-  border: ${DIMENSIONS.BORDER_WIDTH}px solid rgba(0, 0, 0, 0.2);
 
   &::before {
     content: '';
@@ -52,34 +57,34 @@ export const Track = styled.div`
     border-radius: ${DIMENSIONS.BORDER_RADIUS + DIMENSIONS.BORDER_WIDTH}px;
     padding: ${DIMENSIONS.BORDER_WIDTH}px;
     background: ${props => {
-      if (props.position < 0) {
-        return `linear-gradient(
+    if (props.position < 0) {
+      return `linear-gradient(
           90deg, 
           ${COLORS.DECLINE.BORDER.LIGHT} 0%,
-          ${COLORS.DECLINE.BORDER.LIGHT} 5%,
-          ${COLORS.DECLINE.BORDER.DARK} 80%,
-          ${COLORS.DECLINE.BORDER.LIGHT} 95%,
+          ${COLORS.DECLINE.BORDER.LIGHT} 15%,
+          ${COLORS.DECLINE.BORDER.DARK} 50%,
+          ${COLORS.DECLINE.BORDER.LIGHT} 85%,
           ${COLORS.DECLINE.BORDER.LIGHT} 100%
         )`;
-      } else if (props.position > 0) {
-        return `linear-gradient(
+    } else if (props.position > 0) {
+      return `linear-gradient(
           90deg, 
           ${COLORS.ACCEPT.BORDER.LIGHT} 0%,
-          ${COLORS.ACCEPT.BORDER.LIGHT} 5%,
-          ${COLORS.ACCEPT.BORDER.DARK} 80%,
-          ${COLORS.ACCEPT.BORDER.LIGHT} 95%,
+          ${COLORS.ACCEPT.BORDER.LIGHT} 15%,
+          ${COLORS.ACCEPT.BORDER.DARK} 50%,
+          ${COLORS.ACCEPT.BORDER.LIGHT} 85%,
           ${COLORS.ACCEPT.BORDER.LIGHT} 100%
         )`;
-      }
-      return `linear-gradient(
+    }
+    return `linear-gradient(
         90deg, 
         ${COLORS.NEUTRAL.BORDER.LIGHT} 0%,
-        ${COLORS.NEUTRAL.BORDER.LIGHT} 5%,
-        ${COLORS.NEUTRAL.BORDER.DARK} 80%,
-        ${COLORS.NEUTRAL.BORDER.LIGHT} 95%,
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 15%,
+        ${COLORS.NEUTRAL.BORDER.DARK} 50%,
+        ${COLORS.NEUTRAL.BORDER.LIGHT} 85%,
         ${COLORS.NEUTRAL.BORDER.LIGHT} 100%
       )`;
-    }};
+  }};
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
